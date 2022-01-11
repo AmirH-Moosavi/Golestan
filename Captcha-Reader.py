@@ -1,6 +1,6 @@
 from PIL import Image
 
-im = Image.open("1.gif")
+im = Image.open("captcha.gif")
 im = im.convert("P")
 im2 = Image.new("P",im.size,255)
 im = im.convert("P")
