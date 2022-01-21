@@ -3,6 +3,8 @@ import cv2
 IMG_DIR = 'Golestan-Captchas/'
 INPUT_IMAGE = IMG_DIR + '80861.gif'
 
+INPUT_IMAGE = 'captchaG3.gif'
+
 def sharp_img(img):
 	gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	blur_image = cv2.blur(gray_img, (4, 4))
