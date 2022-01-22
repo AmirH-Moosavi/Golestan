@@ -1,7 +1,7 @@
 import cv2
 
 INPUT_IMAGE = 'Golestan-Captchas/56867.gif'
-INPUT_IMAGE = 'captchaG.gif'
+INPUT_IMAGE = 'index.jpeg'
 
 
 def sharp_img(img):
@@ -19,7 +19,10 @@ def clear_img(img):
 	mask = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 	retval, t_mask = cv2.threshold(mask, 70, 255, cv2.THRESH_BINARY)
 	masker = cv2.bitwise_not(t_mask)
-	img = cv2.bitwise_and(img, masker)
+	try:
+		img = cv2.bitwise_and(img, masker)
+	except:
+		pass
 	kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(2,2))
 	opening_img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
 	return opening_img
@@ -50,7 +53,6 @@ def bestContours(contours):
 			contoursDict[index] = len(item)
 	sortedItems = sorted(contoursDict.items(), key=lambda x: x[1], reverse = True)[:5]
 	keys = [item[0] for item in sortedItems]
-	values = [item[1] for item in sortedItems]
 
 	print(sortedItems)
 
@@ -60,24 +62,18 @@ def bestContours(contours):
 			returnedTuple.append(item)
 	return tuple(returnedTuple)
 
-im = cv2.imread(INPUT_IMAGE)
-sim = sharp_img(im)
+def getWords(INPUT_IMAGE, OUTPUT):
 
-cl_img = clear_img(sim)
+	im = cv2.imread(INPUT_IMAGE)
+	sim = sharp_img(im)
 
-contours, hierarchy  = cv2.findContours(cl_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+	cl_img = clear_img(sim)
+	contours, hierarchy  = cv2.findContours(cl_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+	contours = bestContours(contours)
 
-contours = bestContours(contours)
-
-for c in contours:
-	x, y, w, h = cv2.boundingRect(c)
-	ROI = cl_img[y:y+h, x:x+w]
-	cv2.imwrite(f'captcha{x+y}.png', cv2.bitwise_not(ROI))
-	cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
-
-show_image(cl_img)
-
-# cv2.imshow("ClearedImage", cl_img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-# cv2.imwrite('captcha.png', cl_img)
+	for c in contours:
+		x, y, w, h = cv2.boundingRect(c)
+		ROI = cl_img[y:y+h, x:x+w]
+		cv2.imwrite(f'{OUTPUT}/captcha{x+y}.png', cv2.bitwise_not(ROI))
+		cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
+	# show_image(cl_img)
