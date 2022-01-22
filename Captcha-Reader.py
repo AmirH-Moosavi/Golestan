@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 
-INPUT_IMAGE = 'Golestan-Captchas/72162.gif'
-
 INPUT_IMAGE = 'captchaG3.gif'
+INPUT_IMAGE = 'Golestan-Captchas/56867.gif'
+
 
 def sharp_img(img):
 	gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -76,11 +76,11 @@ contours = bestContours(contours)
 
 for c in contours:
 	x, y, w, h = cv2.boundingRect(c)
-	ROI = cl_img[y-3:y+h+1, x-3:x+w+1]
+	ROI = cl_img[y:y+h, x:x+w]
 	cv2.imwrite(f'captcha{x+y}.png', cv2.bitwise_not(ROI))
 	cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
 
-# show_image(cl_img)
+show_image(cl_img)
 
 # cv2.imshow("ClearedImage", cl_img)
 # cv2.waitKey(0)
