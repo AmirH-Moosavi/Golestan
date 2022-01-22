@@ -1,10 +1,7 @@
-from sklearn.cluster import KMeans
-import matplotlib.pyplot as plt
-import numpy as np
 import cv2
 
-INPUT_IMAGE = 'captchaG3.gif'
 INPUT_IMAGE = 'Golestan-Captchas/56867.gif'
+INPUT_IMAGE = 'captchaG.gif'
 
 
 def sharp_img(img):
@@ -25,8 +22,6 @@ def clear_img(img):
 	img = cv2.bitwise_and(img, masker)
 	kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(2,2))
 	opening_img = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
-	# opening_img = cv2.bitwise_not(opening_img)
-
 	return opening_img
 
 def show_image(image):
