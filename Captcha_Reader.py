@@ -38,8 +38,8 @@ def isContain(c, contours):
 		xC, yC, wC, hC = cv2.boundingRect(c)
 		xItem, yItem, wItem, hItem = cv2.boundingRect(item)
 		if (xC - xItem) in range(6) and (yC - yItem) in range(6) and wC < wItem and hC < hItem:
-			print(xC, yC, wC, hC)
-			print(xItem, yItem, wItem, hItem, end="\n\n")
+			# print(xC, yC, wC, hC)
+			# print(xItem, yItem, wItem, hItem, end="\n\n")
 			return True
 		if wC < 5 or hC < 5:
 			return True
@@ -54,7 +54,7 @@ def bestContours(contours):
 	sortedItems = sorted(contoursDict.items(), key=lambda x: x[1], reverse = True)[:5]
 	keys = [item[0] for item in sortedItems]
 
-	print(sortedItems)
+	# print(sortedItems)
 
 	returnedTuple = []
 	for index, item in enumerate(contours):
@@ -62,7 +62,7 @@ def bestContours(contours):
 			returnedTuple.append(item)
 	return tuple(returnedTuple)
 
-def getWords(INPUT_IMAGE, OUTPUT):
+def getWords(INPUT_IMAGE, OUTPUT=None):
 
 	im = cv2.imread(INPUT_IMAGE)
 	sim = sharp_img(im)
@@ -71,9 +71,16 @@ def getWords(INPUT_IMAGE, OUTPUT):
 	contours, hierarchy  = cv2.findContours(cl_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 	contours = bestContours(contours)
 
-	for c in contours:
+	indices = {}
+	clusters = []
+	for index, c in enumerate(contours):
 		x, y, w, h = cv2.boundingRect(c)
 		ROI = cl_img[y:y+h, x:x+w]
-		cv2.imwrite(f'{OUTPUT}/captcha{x+y}.png', cv2.bitwise_not(ROI))
-		cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
+		indices[index] = x
+		clusters.append(ROI)
+		# cv2.imwrite(f'{OUTPUT}/captcha{x+y}.png', ROI)
+		# cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
+	sortedItems = sorted(indices.items(), key=lambda x: x[1])
+	cluster = [clusters[item[0]] for item in sortedItems]
+	return cluster
 	# show_image(cl_img)
