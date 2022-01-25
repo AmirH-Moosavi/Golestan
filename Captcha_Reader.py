@@ -3,7 +3,6 @@ import cv2
 INPUT_IMAGE = 'Golestan-Captchas/56867.gif'
 INPUT_IMAGE = 'index.jpeg'
 
-
 def sharp_img(img):
 	gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	blur_image = cv2.blur(gray_img, (4, 4))
@@ -78,7 +77,7 @@ def getWords(INPUT_IMAGE, OUTPUT=None):
 		ROI = cl_img[y:y+h, x:x+w]
 		indices[index] = x
 		clusters.append(ROI)
-		# cv2.imwrite(f'{OUTPUT}/captcha{x+y}.png', ROI)
+		# cv2.imwrite(f'{OUTPUT}{index}_remained.png', ROI)
 		# cv2.rectangle(cl_img, (x-3, y-3), (x+w+1, y+h+1), (255, 255, 255), 1)
 	sortedItems = sorted(indices.items(), key=lambda x: x[1])
 	cluster = [clusters[item[0]] for item in sortedItems]
