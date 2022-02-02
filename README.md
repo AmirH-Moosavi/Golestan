@@ -2,7 +2,7 @@ This project started with Reading and Solving captchas from the Golestan site.
 Steps:
 
 1) Collecting Captchas:
--Collecting captchas using an API.
+- Collecting captchas using an API.
 
 2) Getting captchas ready for the ML process:
 - Convert captcha backgrounds to black and white.
