@@ -34,7 +34,7 @@ after the model created and saved in directory you should run [captchaSolver.py]
 
 - [modelTrainer.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/modelTrainer.py): trains the model
 
-- [modelTrainer.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/captchaSolver.py): captcha solver
+- [captchaSolver.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/captchaSolver.py): captcha solver
 
 - [modelTrainer.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/cropLettersFromImage.py): image preproccessing and cropping
 
