@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from skimage.transform import resize
-from Captcha_Reader import getWords
+from cropLettersFromImage import getWords
 from skimage.io import imread
 import numpy as np
 import os, pickle
