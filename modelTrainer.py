@@ -1,15 +1,14 @@
 #!/usr/bin/env python
+import os
+import pickle
+
+import numpy as np
+import pandas as pd
+from skimage.io import imread
+from skimage.transform import resize
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score
-from skimage.transform import resize
-from cropLettersFromImage import getWords
-import matplotlib.pyplot as plt
-from skimage.io import imread
-import pandas as pd
-import numpy as np
-import os, pickle
-
 
 print('loading DateSet...')
 target = []
