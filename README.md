@@ -1,20 +1,20 @@
 ## About project
 
-This project started with Reading and Solving captchas from the Golestan site. 
+This project aims to read and Solve captchas from the Golestan website. 
 Steps:
 
-#### 1) Collecting Captchas:
-- Collecting captchas using an API.
+#### 1) Collect Captchas:
+- Collect captchas using an API.
 
-#### 2) Getting captchas ready for the ML process:
+#### 2) Make captchas ready for the ML process:
 - Convert captcha backgrounds to black and white.
-- Split created picture to alphabet and digits by cropping the picture. 
+- Split the created picture into alphabet and digits by cropping the picture. 
 
 #### 3) Implement Classification-Algorithms to make cropped pictures to text:
 - Train the handmade Dataset from Golestan captchas
 - Implement KNN to the trained dataset.
-- Save the model to the .sav file for decreasing the running time of the program.
-- Get the captcha's text as the output by 96% accuracy.
+- Save the model to the .sav file to decrease the program's running time.
+- Generate the captcha's text with 96% accuracy.
 
 ## How to run?
 
@@ -29,7 +29,7 @@ Run [modelTrainer.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/m
 
 
 ### Solve captcha:
-After the model created and saved in directory you should run [captchaSolver.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/captchaSolver.py) for solving speciefic captcha.
+After the model is created and saved in the directory you should run [captchaSolver.py](https://github.com/AmirHoseinMousavi/Captcha-Reader/blob/main/captchaSolver.py) to solve the specific captcha.
 
 
 ## Files and directories
